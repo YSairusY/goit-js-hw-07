@@ -59,7 +59,7 @@ galleryImage.forEach((imgElem) => {
       width: 360px;
       height: 300px;
     `
-  );add tasks and structure code
+  );
 });
 
 const liElement = document.querySelectorAll(".li-element");
