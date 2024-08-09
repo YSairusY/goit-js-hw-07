@@ -1,4 +1,3 @@
-
 const images = [
   {
     url: "https://images.pexels.com/photos/140134/pexels-photo-140134.jpeg?dpr=2&h=750&w=1260",
@@ -26,49 +25,29 @@ const images = [
   },
 ];
 
-const gallery = document.querySelectorAll(".gallery");
-const markup = images
-  .map(
-    (currentImgOfArr) =>
-      `<li class = "li-element">
-      <img class ="gallery-image" src=${currentImgOfArr.url} arl="${currentImgOfArr.alt}">
-      </li>
-      `
-  )
-  .join("");
+const createGalleryCard = pictureInfo => {
+  const galleryItemEl = document.createElement('li');
 
-gallery.forEach((imgList) => {
-  imgList.insertAdjacentHTML("afterbegin", markup);
-  imgList.setAttribute(
-    "style",
-    `
-      display: flex;
-      flex-direction:row;
-      flex-wrap: wrap;
-      column-gap:24px;
-      row-gap:48px;
-    `
-  );
-});
+  galleryItemEl.classList.add('gallery-item');
 
-const galleryImage = document.querySelectorAll(".gallery-image");
-galleryImage.forEach((imgElem) => {
-  imgElem.setAttribute(
-    "style",
-    `
-      width: 360px;
-      height: 300px;
-    `
-  );
-});
+  const galleryLinkEl = document.createElement('a');
 
-const liElement = document.querySelectorAll(".li-element");
-liElement.forEach((li) => {
-  li.setAttribute(
-    "style",
-    `
-      flex-basis: calc((100% - 24px)/ 4);
-      list-style: none;
-    `
-  );
-});
+  galleryLinkEl.href = '#';
+  galleryItemEl.append(galleryLinkEl);
+
+  const galleryImgEl = document.createElement('img');
+
+  galleryImgEl.src = pictureInfo.url;
+  galleryImgEl.alt = pictureInfo.alt;
+  galleryLinkEl.append(galleryImgEl);
+
+  return galleryItemEl;
+};
+
+const galleryCardsArr = images.map(imgInfo => createGalleryCard(imgInfo));
+
+console.log(galleryCardsArr);
+
+const galleryListEl = document.querySelector('.gallery');
+
+galleryListEl.append(...galleryCardsArr);
